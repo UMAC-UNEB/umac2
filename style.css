@@ -1,0 +1,107 @@
+navbar {
+    background-color: #7b1d1d; /* Maroon background from images */
+    font-family: Arial, sans-serif;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Dropdown Container */
+.dropdown {
+    position: relative;
+}
+
+/* Dropdown Content (Hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #1a1a1a; /* Dark background as seen in images */
+    min-width: 260px;
+    z-index: 1;
+    text-align: left;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #333;
+    font-size: 13px;
+}
+
+/* Hover effects */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #333;
+}
+page-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 30%;
+    padding-right: 30px;
+}
+
+.side-menu {
+    list-style: none;
+    padding: 0;
+    border: 1px solid #eee;
+}
+
+.side-menu li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #555;
+    border-bottom: 1px solid #eee;
+}
+
+/* Highlighting the active page in green as seen in the source */
+.side-menu li.active a {
+    color: #4CAF50; 
+    font-weight: bold;
+}
+
+.question-box {
+    background-color: #f7f7f7;
+    padding: 15px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+}
+
+.question-box input, .question-box textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.content {
+    width: 70%;
+    line-height: 1.6;
+    color: #333;
+}

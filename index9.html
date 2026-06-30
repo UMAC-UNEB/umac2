@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .services-portal {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+    .services-sidebar {
+      background: var(--light);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--gold);
+      align-self: start;
+      position: sticky;
+      top: 100px;
+    }
+    .services-sidebar h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--green-dark);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--gold-light);
+    }
+    .services-sidebar ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .services-sidebar ul li a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--dark);
+      transition: var(--transition);
+      border-left: 3px solid transparent;
+      cursor: pointer;
+    }
+    .services-sidebar ul li a:hover,
+    .services-sidebar ul li a.active-link {
+      background: rgba(212, 168, 67, 0.1);
+      border-left-color: var(--gold);
+      color: var(--gold-dark);
+    }
+    .services-sidebar ul li a.active-link {
+      background: var(--gold);
+      color: #fff;
+      border-left-color: var(--gold-dark);
+    }
+
+    .services-content .page-title {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--green-dark);
+      margin-bottom: 20px;
+    }
+    .services-content .section-heading {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      color: var(--green-dark);
+      margin: 28px 0 12px;
+    }
+    .services-content p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .services-content ul {
+      padding-left: 24px;
+      margin-bottom: 20px;
+    }
+    .services-content ul li {
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+    .services-content .notice-box {
+      background: var(--light);
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      border-left: 6px solid var(--gold);
+      margin: 20px 0;
+    }
+    .services-content .notice-box strong {
+      color: var(--green-dark);
+    }
+
+    .question-box {
+      background: var(--green-dark);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      margin-top: 24px;
+      color: #fff;
+    }
+    .question-box h4 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+    .question-box input,
+    .question-box textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      transition: var(--transition);
+    }
+    .question-box input::placeholder,
+    .question-box textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    .question-box input:focus,
+    .question-box textarea:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .question-box button {
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .question-box button:hover {
+      background: var(--gold-dark);
+    }
+
+    </style>
+    <meta charset="UTF-8">
+    <title>UMAC services portal-Preview</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Uganda Marking Association Centre UMAC </title>
+</head>
+<body>
+<nav class="navbar">
+    <ul>
+        <li class="dropdown">
+            <a href="services.html" class="dropbdown-content">Services</a>
+            <div class="dropdown-content">
+                <a href="registration.html">Registration of Candidates</a>
+                <a href="assessment.html">Assessment of Candidates</a>
+                <a href="certificates.html">Awarding of Certificates</a>
+                <a href="verification.html">Verification of Results</a>
+                <a href ="validation.html">Validation of Exam Centres</a>
+                <a href="equating.html">Equating of foreign results</a>
+                <a href="research.html">Research and Publications</a>
+            </div>
+        </li>
+    </ul>
+</nav>
+<div class="sidebar">
+    <h3>OUR SERVICES</h3>
+        <ul>
+            <li><a href="registration.html">Registration of Candidates</a></li>
+            <li><a href="assessment.html">Assessment of Candidates</a></li>
+            <li><a href="certificates.html">Awarding of Certificates</a></li>
+            <li><a href="equating.html">Equating of foreign results</a></li>
+            <li><a href="research.html">Research and Publications</a></li>
+            <li><a href="validation.html"class="active-link">Validation of Exam Centres</a></li>
+            <li><a href="verification.html">Verification of Results</a></li>
+        </ul>
+</div>
+<div class="question-box">
+    <h4>ANY QUESTIONS?</h4>
+    <form>
+        <input type="text" placeholder="Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Telephone" required>
+        <textarea placeholder="Message" required></textarea>
+        <button type="submit">SEND MESSAGE</button>
+    </form>
+</div>
+    <main class="content">
+        <h1 class="page-title">Validation of Exam Centres</h1>
+        <section class="validation-intro">
+            <h2 class="section-heading">Overview of Centre Validation</h2>
+            <p>Validation of Exam Centres is a critical process conducted by the Uganda Marking Association Centre (UMAC) to ensure that all schools and institutions hosting national examinations (PLE, UCE, and UACE) meet the required infrastructure and technical standards.</p>
+            <p>This process ensures that a centre is capable of handling candidate data securely and conducting examinations with the necessary integrity.</p>
+        </section>
+        <section class="minimum-requirements">
+            <h2 class="section-heading">Minimum Requirements for Validation</h2>
+            <p>For a School/Centre to be validated, especially for the purpose of the e-Registration programme, they should possess the following:</p>
+            <ul>
+                <li><strong>Hardware:</strong> A computer system running a modern Windows Operating System.</li>
+                <li><strong>Personnel:</strong> At least one trained person capable of performing e-Registration and managing candidate data.</li>
+                <li><strong>Data Handling:</strong> Facilities to capture or store digital photographs of candidates.</li>
+                <li><strong>Connectivity:</strong> An internet connection for uploading data to the UMAC portal. (In cases where internet is absent, centres must have an export facility to move data to an Excel workbook for uploading from a location with internet access).</li>
+            </ul>
+        </section>
+        <section class="collaboration-policy">
+            <h2 class="section-heading">Support for Emerging Centres</h2>
+            <p>UMAC recognizes that some new or smaller centres may not yet have full computer facilities. To ensure validation is still possible, the Association allows for the following:</p>
+            <ul>
+                <li><strong>Teaming:</strong> Centres may meet the minimum requirements by teaming with other Schools/Centres in their neighborhood to share ICT facilities.</li>
+                <li><strong>Hiring:</strong> Centres are permitted to hire the necessary equipment for one-time use during the registration and examination periods.</li>
+                <li><strong>Shared Infrastructure:</strong> A single computer can be used to register candidates from several different centres if needed.</li>
+            </ul>
+        </section>
+        <section class="data-verification">
+            <h2 class="section-heading">Operational Standards</h2>
+            <p>Once a centre is validated, it is responsible for the accuracy of the data submitted. All information entered into the provided templates must be uploaded to the UMAC portal for thorough verification and confirmation of accuracy. Validated centres must also ensure that institution choices are submitted at the time of candidate registration.</p>
+        </section>
+    </main>
+</div>
+</body>
+</html>
