@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UMAC – Opportunities</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans',Helvetica, Arial, sans-serif;
+            background: #f0f4f8;
+            color: #0b1e33;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: #002147;
+            color: #fff;
+            font-size: 0.85rem;
+            padding: 8px 0;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+        }
+
+        .top-bar .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .top-bar .contact-info i {
+            margin-right: 6px;
+            color: #fdcb2f;
+        }
+
+        .top-bar .contact-info span {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .top-bar .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .top-bar .social-icons a {
+            color: #ccc;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .top-bar .social-icons a:hover {
+            color: #fdcb2f;
+        }
+
+        /* ===== HEADER / NAV ===== */
+        .header {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            padding: 14px 0;
+            border-bottom: 3px solid #fdcb2f;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 14px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo .logo-icon {
+            background: #002147;
+            color: #fdcb2f;
+            width: 52px;
+            height: 52px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .logo .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #002147;
+            letter-spacing: -0.5px;
+        }
+
+        .logo .logo-text small {
+            display: block;
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: #555;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            padding: 8px 14px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #1e2a3a;
+            border-radius: 4px;
+            transition: background 0.25s, color 0.25s;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            background: #f0f3f8;
+            color: #002147;
+        }
+
+        .nav-menu a.active {
+            background: #fdcb2f;
+            color: #002147;
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: #002147;
+            border-radius: 4px;
+        }
+
+        /* ===== PAGE TITLE BAR ===== */
+        .page-title-bar {
+            background: #002147;
+            color: #fff;
+            padding: 28px 0 22px;
+        }
+
+        .page-title-bar h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .page-title-bar p {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+
+        /* ===== OPPORTUNITIES SECTION ===== */
+        .opportunities-section {
+            padding: 48px 0 60px;
+        }
+
+        .opportunities-section .section-intro {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 44px;
+        }
+
+        .opportunities-section .section-intro h2 {
+            font-size: 1.8rem;
+            color: #002147;
+            margin-bottom: 10px;
+        }
+
+        .opportunities-section .section-intro p {
+            color: #3d4f62;
+            font-size: 1.05rem;
+        }
+
+        /* ===== OPPORTUNITY CARDS ===== */
+        .opportunity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 28px;
+            margin-bottom: 44px;
+        }
+
+        .opportunity-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 33, 71, 0.08);
+            padding: 28px 26px 30px;
+            transition: transform 0.25s, box-shadow 0.3s;
+            border-left: 6px solid #fdcb2f;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0, 33, 71, 0.12);
+        }
+
+        .opportunity-card .card-icon {
+            font-size: 2.2rem;
+            color: #002147;
+            margin-bottom: 12px;
+        }
+
+        .opportunity-card h3 {
+            font-size: 1.25rem;
+            color: #002147;
+            margin-bottom: 8px;
+        }
+
+        .opportunity-card p {
+            color: #3d4f62;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .opportunity-card .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #5a6f82;
+            border-top: 1px solid #e9edf2;
+            padding-top: 14px;
+            margin-top: 4px;
+        }
+
+        .opportunity-card .card-meta i {
+            margin-right: 4px;
+        }
+
+        .opportunity-card .btn-apply {
+            background: #002147;
+            color: #fff;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .opportunity-card .btn-apply:hover {
+            background: #003366;
+            transform: scale(1.02);
+        }
+
+        .opportunity-card .btn-apply i {
+            font-size: 0.8rem;
+        }
+
+        /* ===== OPPORTUNITY LIST (alternative style) ===== */
+        .opportunity-list-title {
+            font-size: 1.5rem;
+            color: #002147;
+            margin: 44px 0 18px;
+            border-bottom: 2px solid #e9edf2;
+            padding-bottom: 10px;
+        }
+
+        .opportunity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .opportunity-list-item {
+            background: #fff;
+            border-radius: 10px;
+            padding: 16px 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px 18px;
+            transition: background 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .opportunity-list-item:hover {
+            background: #fafcff;
+            border-left-color: #fdcb2f;
+        }
+
+        .opportunity-list-item .info h4 {
+            font-size: 1rem;
+            color: #002147;
+        }
+
+        .opportunity-list-item .info p {
+            font-size: 0.88rem;
+            color: #5a6f82;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 2px;
+        }
+
+        .opportunity-list-item .info p i {
+            margin-right: 4px;
+            color: #fdcb2f;
+        }
+
+        .opportunity-list-item .badge {
+            background: #e9edf2;
+            color: #1e2a3a;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .opportunity-list-item .badge.hot {
+            background: #fdcb2f;
+            color: #002147;
+        }
+
+        .opportunity-list-item .badge.new {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .opportunity-list-item .badge.closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* ===== CTA BANNER ===== */
+        .cta-banner {
+            background: linear-gradient(135deg, #002147 0%, #003366 100%);
+            border-radius: 14px;
+            padding: 36px 40px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px 30px;
+            margin-top: 20px;
+        }
+
+        .cta-banner h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .cta-banner p {
+            opacity: 0.85;
+            font-size: 1rem;
+        }
+
+        .cta-banner .btn-cta {
+            background: #fdcb2f;
+            color: #002147;
+            padding: 12px 34px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: background 0.25s, transform 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-banner .btn-cta:hover {
+            background: #ffd95e;
+            transform: scale(1.02);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #002147;
+            color: #d0dbe6;
+            padding: 44px 0 28px;
+            border-top: 4px solid #fdcb2f;
+        }
+
+        .footer .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px 40px;
+        }
+
+        .footer h4 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .footer p,
+        .footer a {
+            font-size: 0.9rem;
+            color: #bcc9d6;
+            line-height: 1.8;
+        }
+
+        .footer a:hover {
+            color: #fdcb2f;
+        }
+
+        .footer .contact-details i {
+            width: 22px;
+            color: #fdcb2f;
+            margin-right: 6px;
+        }
+
+        .footer .contact-details div {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .footer .footer-bottom {
+            grid-column: 1 / -1;
+            border-top: 1px solid #1a3a5a;
+            padding-top: 22px;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #8aa3b8;
+        }
+
+        .footer .footer-bottom span {
+            color: #fdcb2f;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .logo {
+                justify-content: center;
+            }
+
+            .nav-menu {
+                justify-content: center;
+                gap: 4px;
+            }
+
+            .nav-menu a {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+
+            .top-bar .container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .top-bar .contact-info {
+                justify-content: center;
+            }
+
+            .page-title-bar h1 {
+                font-size: 1.5rem;
+            }
+
+            .opportunity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 28px 20px;
+            }
+
+            .opportunity-list-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer .contact-details div {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu a {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+
+            .logo .logo-text {
+                font-size: 1rem;
+            }
+
+            .opportunity-card {
+                padding: 20px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <span><i class="fas fa-envelope"></i> info@umac.ug</span>
+                <span><i class="fas fa-phone-alt"></i> TOLL FREE 0800 111427</span>
+                <span><i class="fas fa-map-marker-alt"></i> 35 Martyrs way Ntinda, P.O Box 7066, Kampala Uganda</span>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER / NAV ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-icon">UMAC</div>
+                <div class="logo-text">
+                    Uganda Marking Association Center
+                    <small>Excellence in Marking &amp; Assessment</small>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#">HOME</a>
+                <a href="#">ABOUT US</a>
+                <a href="#">DIRECTORATES</a>
+                <a href="#">SERVICES</a>
+                <a href="#">MEDIA CENTRE</a>
+                <a href="#" class="active">OPPORTUNITIES</a>
+                <a href="#">CONTACT US</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== PAGE TITLE BAR ===== -->
+    <section class="page-title-bar">
+        <div class="container">
+            <h1>Opportunities</h1>
+            <p>Explore career openings, tenders, scholarships, and partnership opportunities at UMAC.</p>
+        </div>
+    </section>
+
+    <!-- OPPORTUNITIES MAIN CONTENT  -->
+    <section class="opportunities-section">
+        <div class="container">
+
+            <!-- Section Intro -->
+            <div class="section-intro">
+                <h2>Current Opportunities</h2>
+                <p>Join us in shaping the future of marking and assessment in Uganda. Find the latest openings and calls for applications below.</p>
+            </div>
+
+            <!-- ===== GRID CARDS ===== -->
+            <div class="opportunity-grid">
+
+                <!-- Card 1: Job Vacancy -->
+                <div class="opportunity-card">
+                    <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                    <h3>Job Vacancies</h3>
+                    <p>Explore open positions across various departments. We are looking for dedicated professionals to join our team.</p>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> Deadline: 30 June 2026</span>
+                        <button class="btn-apply">Apply Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Card 2: Tenders -->
+                <div class="opportunity-card">
+                    <div class="card-icon"><i class="fas fa-file-signature"></i></div>
+                    <h3>Tenders &amp; Procurement</h3>
+                    <p>View current tenders, bids, and procurement notices. Suppliers and service providers are invited to participate.</p>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> Deadline: 15 July 2026</span>
+                        <button class="btn-apply">View Tenders <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Scholarships -->
+                <div class="opportunity-card">
+                    <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Scholarships &amp; Bursaries</h3>
+                    <p>Financial support opportunities for outstanding students. Check eligibility and application guidelines.</p>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> Deadline: 10 August 2026</span>
+                        <button class="btn-apply">Learn More <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Partnerships -->
+                <div class="opportunity-card">
+                    <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Partnerships &amp; Collaborations</h3>
+                    <p>We welcome partnerships with educational institutions, NGOs, and development partners.</p>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> Rolling Basis</span>
+                        <button class="btn-apply">Get in Touch <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Card 5: Internships -->
+                <div class="opportunity-card">
+                    <div class="card-icon"><i class="fas fa-user-graduate"></i></div>
+                    <h3>Internships &amp; Graduate Trainees</h3>
+                    <p>Kickstart your career with UMAC's internship and trainee programmes. Gain hands-on experience.</p>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> Deadline: 25 September 2026</span>
+                        <button class="btn-apply">Apply Now <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Card 6: Consultancy -->
+                <div class="opportunity-card">
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Consultancy Opportunities</h3>
+                    <p>We invite qualified consultants to express interest in upcoming assignments and projects.</p>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> Deadline: 05 November 2026</span>
+                        <button class="btn-apply">Express Interest <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+
+            </div>
+            <!-- end grid -->
+
+            <!-- ===== LIST VIEW (additional opportunities) ===== -->
+            <h3 class="opportunity-list-title"><i class="fas fa-list-ul" style="margin-right:10px; color:#fdcb2f;"></i> All Open Opportunities</h3>
+
+            <div class="opportunity-list">
+
+                <div class="opportunity-list-item">
+                    <div class="info">
+                        <h4>Senior Assessment Officer – Mathematics</h4>
+                        <p>
+                            <span><i class="far fa-calendar-alt"></i> Deadline: 30 Jun 2026</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</span>
+                            <span><i class="fas fa-clock"></i> Full Time</span>
+                        </p>
+                    </div>
+                    <span class="badge hot">Hot</span>
+                </div>
+
+                <div class="opportunity-list-item">
+                    <div class="info">
+                        <h4>ICT Systems Administrator</h4>
+                        <p>
+                            <span><i class="far fa-calendar-alt"></i> Deadline: 15 Jul 2026</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</span>
+                            <span><i class="fas fa-clock"></i> Full Time</span>
+                        </p>
+                    </div>
+                    <span class="badge new">New</span>
+                </div>
+
+                <div class="opportunity-list-item">
+                    <div class="info">
+                        <h4>Procurement of Marking Services – Tender No. UMAC/2026/003</h4>
+                        <p>
+                            <span><i class="far fa-calendar-alt"></i> Deadline: 15 Jul 2026</span>
+                            <span><i class="fas fa-tag"></i> Tender</span>
+                        </p>
+                    </div>
+                    <span class="badge">Open</span>
+                </div>
+
+                <div class="opportunity-list-item">
+                    <div class="info">
+                        <h4>Research Fellowship – Assessment &amp; Evaluation</h4>
+                        <p>
+                            <span><i class="far fa-calendar-alt"></i> Deadline: 10 Aug 2026</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</span>
+                            <span><i class="fas fa-clock"></i> Contract</span>
+                        </p>
+                    </div>
+                    <span class="badge new">New</span>
+                </div>
+
+                <div class="opportunity-list-item">
+                    <div class="info">
+                        <h4>Supply of Office Furniture &amp; Equipment – Tender No. UMAC/2026/007</h4>
+                        <p>
+                            <span><i class="far fa-calendar-alt"></i> Deadline: 05 Aug 2026</span>
+                            <span><i class="fas fa-tag"></i> Tender</span>
+                        </p>
+                    </div>
+                    <span class="badge">Open</span>
+                </div>
+
+                <div class="opportunity-list-item">
+                    <div class="info">
+                        <h4>Graduate Trainee Programme 2026 – Various Disciplines</h4>
+                        <p>
+                            <span><i class="far fa-calendar-alt"></i> Deadline: 25 Sep 2026</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</span>
+                            <span><i class="fas fa-clock"></i> Traineeship</span>
+                        </p>
+                    </div>
+                    <span class="badge hot">Hot</span>
+                </div>
+
+                <div class="opportunity-list-item">
+                    <div class="info">
+                        <h4>Consultancy: Development of Digital Marking Tools</h4>
+                        <p>
+                            <span><i class="far fa-calendar-alt"></i> Deadline: 05 Nov 2026</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</span>
+                            <span><i class="fas fa-clock"></i> Consultancy</span>
+                        </p>
+                    </div>
+                    <span class="badge closed">Closed</span>
+                </div>
+
+            </div>
+            <!-- end list -->
+
+            <!-- ===== CTA BANNER ===== -->
+            <div class="cta-banner">
+                <div>
+                    <h3><i class="fas fa-bullhorn" style="margin-right:12px;"></i> Stay Updated</h3>
+                    <p>Subscribe to our newsletter to receive the latest opportunities directly in your inbox.</p>
+                </div>
+                <a href="#" class="btn-cta"><i class="fas fa-envelope"></i> Subscribe Now</a>
+            </div>
+
+        </div>
+        <!-- end container -->
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+
+            <div>
+                <h4>UMAC</h4>
+                <p>Uganda Marking Association Center is committed to excellence in marking, assessment, and educational evaluation in Uganda.</p>
+                <p style="margin-top:8px;"><strong style="color:#fff;">TOLL FREE:</strong> 0800 111427</p>
+            </div>
+
+            <div>
+                <h4>Quick Links</h4>
+                <a href="#">Home</a><br />
+                <a href="#">About Us</a><br />
+                <a href="#">Directorates</a><br />
+                <a href="#">Services</a><br />
+                <a href="#">Media Centre</a><br />
+                <a href="#">Opportunities</a><br />
+                <a href="#">Contact Us</a>
+            </div>
+
+            <div>
+                <h4>Contact</h4>
+                <div class="contact-details">
+                    <div><i class="fas fa-envelope"></i> info@umac.ug</div>
+                    <div><i class="fas fa-phone-alt"></i> 0800 111427 (Toll Free)</div>
+                    <div><i class="fas fa-map-marker-alt"></i> 35 Martyrs way Ntinda,<br /> P.O Box 7066, Kampala Uganda.</div>
+                </div>
+            </div>
+
+            <div>
+                <h4>Follow Us</h4>
+                <div style="display:flex; gap:14px; margin-top:4px; flex-wrap:wrap;">
+                    <a href="#" style="background:#1a3a5a; padding:8px 12px; border-radius:6px; display:inline-flex; align-items:center; gap:6px;"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="#" style="background:#1a3a5a; padding:8px 12px; border-radius:6px; display:inline-flex; align-items:center; gap:6px;"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a href="#" style="background:#1a3a5a; padding:8px 12px; border-radius:6px; display:inline-flex; align-items:center; gap:6px;"><i class="fab fa-youtube"></i> YouTube</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                &copy; 2026 <span>Uganda Marking Association Center (UMAC)</span>. All Rights Reserved.
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
