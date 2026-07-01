@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME PAGE</title>
+    <style>
+         /* ============================================================
+       ALL STYLES EMBEDDED – SELF‑CONTAINED SINGLE‑PAGE APPLICATION
+       ============================================================ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --gold: #d4a843;
+      --gold-light: #f0d68a;
+      --gold-dark: #b8922f;
+      --green: #1a5c2a;
+      --green-dark: #0f3d1b;
+      --green-light: #2a7a3f;
+      --black: #1a1a1a;
+      --dark: #222;
+      --muted: #5a5a5a;
+      --light: #f7f5f0;
+      --white: #ffffff;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.14);
+      --radius: 12px;
+      --transition: 0.3s ease;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Playfair Display', serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ===== UTILITY ===== */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .page-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== TOP BAR ===== */
+    .topbar {
+      background: var(--green-dark);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.8rem;
+      padding: 8px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px 16px;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .topbar a {
+      color: var(--gold-light);
+    }
+    .topbar a:hover {
+      color: var(--gold);
+    }
+
+    .topbar .socials {
+      display: flex;
+      gap: 12px;
+    }
+    .topbar .socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fff;
+      transition: var(--transition);
+    }
+    .topbar .socials a:hover {
+      background: var(--gold);
+      color: var(--green-dark);
+    }
+    .topbar .socials a i {
+      font-size: 0.75rem;
+    }
+
+    /* ===== HEADER / NAV ===== */
+    header {
+      background: var(--white);
+      padding: 16px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px 24px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-img {
+      width: 60px;
+      height: 60px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .logo-text h1 {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--green-dark);
+      letter-spacing: -0.02em;
+    }
+    .logo-text h1 span {
+      color: var(--gold-dark);
+    }
+    .logo-text p {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      list-style: none;
+      gap: 4px 8px;
+    }
+    nav ul li a {
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--dark);
+      transition: var(--transition);
+      display: block;
+      cursor: pointer;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      background: var(--gold);
+      color: #fff;
+    }
+    nav ul li a.active {
+      background: var(--green);
+    }
+
+    /* ===== PAGE BANNER ===== */
+    .page-banner {
+      background: var(--green-dark);
+      padding: 48px 24px 40px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--gold);
+    }
+    .page-banner h2 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .page-banner h2 span {
+      color: var(--gold-light);
+    }
+    .page-banner p {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ===== BREADCRUMB ===== */
+    .breadcrumb {
+      padding: 12px 24px;
+      background: var(--light);
+      border-bottom: 1px solid #eee;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .breadcrumb a {
+      color: var(--green-dark);
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .breadcrumb a:hover {
+      color: var(--gold-dark);
+    }
+    .breadcrumb span {
+      color: var(--muted);
+    }
+
+    /* ===== SECTION COMMON ===== */
+    section {
+      padding: 64px 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--green-dark);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .section-line {
+      width: 60px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 4px;
+      margin: 12px 0 28px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-block;
+      padding: 14px 34px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: #fff;
+      border-color: var(--gold);
+    }
+    .btn-gold:hover {
+      background: var(--gold-dark);
+      border-color: var(--gold-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(212, 168, 67, 0.3);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--green-dark);
+      border-color: var(--green-dark);
+    }
+    .btn-outline:hover {
+      background: var(--green-dark);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* ===== SHARE BAR ===== */
+    .share-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      max-width: 1200px;
+      margin: 0 auto 16px;
+      padding: 16px 24px;
+      background: var(--light);
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .share-bar span {
+      color: var(--muted);
+      margin-right: 4px;
+    }
+    .share-btn {
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #fff;
+      transition: var(--transition);
+    }
+    .share-btn.wa {
+      background: #25D366;
+    }
+    .share-btn.wa:hover {
+      background: #1da851;
+    }
+    .share-btn.fb {
+      background: #1877F2;
+    }
+    .share-btn.fb:hover {
+      background: #0d65d9;
+    }
+    .share-btn.tw {
+      background: #000;
+    }
+    .share-btn.tw:hover {
+      background: #222;
+    }
+
+    /* ============================================================
+       HOME PAGE SPECIFIC
+       ============================================================ */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1280px;
+      margin: 40px auto 0;
+      padding: 0 24px 40px;
+      align-items: center;
+    }
+
+    .hero-image-slot {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #e8e3d8;
+      min-height: 340px;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+    .hero-image-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 340px;
+    }
+    .hero-image-slot .img-placeholder {
+      position: absolute;
+      inset: 0;
+      background: #e8e3d8;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 24px;
+    }
+    .hero-image-slot img~.img-placeholder {
+      display: none;
+    }
+
+    .hero-content {
+      padding: 8px 0;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .hero-content h2 {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--green-dark);
+    }
+    .hero-content h2 span {
+      color: var(--gold-dark);
+      position: relative;
+    }
+    .hero-content h2 span::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gold-light);
+      border-radius: 4px;
+    }
+    .hero-content p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 28px;
+      max-width: 540px;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
+    }
+    .quick-links a {
+      background: var(--light);
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 500;
+      color: var(--dark);
+      transition: var(--transition);
+      border-left: 4px solid var(--gold);
+      box-shadow: var(--shadow);
+    }
+    .quick-links a:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      background: #fff;
+    }
+    .ql-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .who {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      padding-top: 0;
+    }
+    .who-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #e8e3d8;
+      min-height: 320px;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+    .who-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 320px;
+    }
+    .who-image .img-placeholder {
+      position: absolute;
+      inset: 0;
+      background: #e8e3d8;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 24px;
+    }
+    .who-image img~.img-placeholder {
+      display: none;
+    }
+
+    .value-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .value-card {
+      background: var(--light);
+      padding: 20px 20px 18px;
+      border-radius: var(--radius);
+      border-bottom: 3px solid var(--gold);
+      transition: var(--transition);
+    }
+    .value-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+    .value-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+    .value-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .ed-section {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 48px;
+      background: var(--green-dark);
+      border-radius: var(--radius);
+      padding: 48px 56px;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, 0.9);
+      align-items: start;
+    }
+    .ed-section .section-label {
+      color: var(--gold-light);
+    }
+    .ed-section .section-title {
+      color: #fff;
+    }
+    .ed-section .section-line {
+      background: var(--gold);
+    }
+    .ed-section p {
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.8;
+      margin-bottom: 16px;
+      font-size: 0.98rem;
+    }
+    .ed-photo {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #2a4a35;
+      min-height: 280px;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    .ed-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 280px;
+    }
+    .ed-photo .img-placeholder {
+      position: absolute;
+      inset: 0;
+      background: #2a4a35;
+      border-radius: var(--radius);
+      color: rgba(255, 255, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85rem;
+    }
+    .ed-photo img~.img-placeholder {
+      display: none;
+    }
+    .ed-sig {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-top: 8px;
+      line-height: 1.3;
+    }
+    .ed-sig span {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 2px;
+    }
+
+    .iso-bar {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto 8px;
+      padding: 24px 32px;
+      background: var(--light);
+      border-radius: var(--radius);
+      border-left: 6px solid var(--gold);
+      flex-wrap: wrap;
+    }
+    .iso-badge {
+      background: var(--green-dark);
+      color: #fff;
+      font-weight: 900;
+      font-size: 0.8rem;
+      text-align: center;
+      line-height: 1.2;
+      padding: 12px 16px;
+      border-radius: 8px;
+      min-width: 80px;
+      letter-spacing: 0.05em;
+    }
+    .iso-bar p {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--green-dark);
+      margin-bottom: 2px;
+    }
+    .iso-bar span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 8px;
+    }
+    .job-card {
+      background: var(--light);
+      padding: 28px 28px 24px;
+      border-radius: var(--radius);
+      border-top: 4px solid var(--gold);
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .job-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      background: #fff;
+    }
+    .job-card h4 {
+      font-size: 1.05rem;
+      color: var(--green-dark);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    .job-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .job-card a {
+      font-weight: 600;
+      color: var(--gold-dark);
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .job-card a:hover {
+      color: var(--green-dark);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 8px;
+    }
+    .service-card {
+      background: var(--white);
+      padding: 28px 24px 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: var(--transition);
+      border: 1px solid #eee;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--gold-light);
+    }
+    .service-icon {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+    }
+    .service-icon .si-fallback {
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+    .service-card h4 {
+      font-size: 1rem;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+      margin-top: 8px;
+    }
+    .news-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid #eee;
+    }
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .news-img {
+      height: 200px;
+      background: #e8e3d8;
+      position: relative;
+      overflow: hidden;
+    }
+    .news-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .news-img .img-placeholder {
+      position: absolute;
+      inset: 0;
+      background: #e8e3d8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 24px;
+      border-radius: 0;
+    }
+    .news-img img~.img-placeholder {
+      display: none;
+    }
+    .news-body {
+      padding: 20px 22px 24px;
+    }
+    .news-date {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold-dark);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .news-body h4 {
+      font-size: 1rem;
+      color: var(--green-dark);
+      margin-bottom: 10px;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+    .news-body a {
+      font-weight: 600;
+      color: var(--gold-dark);
+      font-size: 0.85rem;
+    }
+    .news-body a:hover {
+      color: var(--green-dark);
+    }
+        /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 48px 24px 0;
+      margin-top: 8px;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-about .footer-logo {
+      font-weight: 900;
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-about .footer-logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--gold);
+    }
+    .footer-about p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 340px;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .footer-socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+    .footer-socials a:hover {
+      background: var(--gold);
+      color: var(--green-dark);
+    }
+    .footer-socials a i {
+      font-size: 0.9rem;
+    }
+
+    .footer-col h5 {
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+      letter-spacing: 0.02em;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-col ul li a {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.65);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .footer-col ul li a:hover {
+      color: var(--gold-light);
+      padding-left: 4px;
+    }
+    .footer-contact p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 6px;
+    }
+    .footer-contact p strong {
+      color: var(--gold);
+    }
+    .footer-contact a {
+      color: var(--gold-light);
+    }
+    .footer-contact a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px 0 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    .footer-bottom a {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .footer-bottom a:hover {
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 1024px) {
+      .hero,
+      .who,
+      .ed-section,
+      .intro-grid,
+      .contact-main,
+      .media-container,
+      .services-portal {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .ed-section {
+        padding: 36px 28px;
+      }
+      .ed-photo {
+        max-width: 280px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column;
+        text-align: center;
+        font-size: 0.7rem;
+        padding: 6px 16px;
+      }
+      header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 16px;
+      }
+      .logo-area {
+        justify-content: center;
+      }
+      .logo-text h1 {
+        font-size: 1.1rem;
+      }
+      nav ul {
+        justify-content: center;
+        gap: 2px 4px;
+      }
+      nav ul li a {
+        font-size: 0.7rem;
+        padding: 6px 12px;
+      }
+
+      .hero {
+        padding: 0 16px 24px;
+        margin-top: 16px;
+      }
+      .hero-content h2 {
+        font-size: 1.8rem;
+      }
+      .hero-content p {
+        font-size: 0.95rem;
+      }
+
+      .quick-links {
+        grid-template-columns: 1fr 1fr;
+        padding: 0 16px;
+        gap: 10px;
+      }
+      .quick-links a {
+        padding: 14px 16px;
+        font-size: 0.8rem;
+      }
+
+      section {
+        padding: 40px 16px;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .value-cards,
+      .vm-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .footer-about p {
+        max-width: 100%;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .page-banner h2 {
+        font-size: 2rem;
+      }
+      .page-banner p {
+        font-size: 0.95rem;
+      }
+
+      .media-container,
+      .services-portal,
+      .contact-main {
+        grid-template-columns: 1fr;
+        padding: 28px 16px 48px;
+      }
+      .services-sidebar {
+        position: static;
+      }
+
+      .opportunity-grid {
+        grid-template-columns: 1fr;
+      }
+      .cta-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 20px;
+      }
+      .contact-block {
+        grid-template-columns: 1fr;
+        padding: 28px 24px;
+      }
+      .contact-block .contact-item {
+        flex-direction: column;
+        text-align: center;
+      }
+      .map-embed iframe {
+        height: 200px;
+      }
+      .form-card {
+        padding: 24px 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .quick-links {
+        grid-template-columns: 1fr;
+      }
+      .hero-content h2 {
+        font-size: 1.5rem;
+      }
+      .hero-cta .btn {
+        width: 100%;
+        text-align: center;
+      }
+      .ed-section {
+        padding: 24px 16px;
+      }
+      .ed-sig {
+        font-size: 1.2rem;
+      }
+      .page-banner h2 {
+        font-size: 1.6rem;
+      }
+      .news-meta {
+        font-size: 0.7rem;
+        gap: 8px 12px;
+      }
+      .news-meta .news-category {
+        font-size: 0.6rem;
+        padding: 1px 10px;
+      }
+      .widget {
+        padding: 20px 16px;
+      }
+    }
+    
+    </style>
+</head>
+<body>
+    
+  <!-- ===== TOP BAR ===== -->
+  <div class="topbar">
+    <span>📧 <a href="mailto:aisujoshua10@gmail.com">umac@umac.ac.ug</a> &nbsp;|&nbsp; 📞 Contact us on: <strong>0744 129 202</strong> &nbsp;|&nbsp; 35 Martyrs Way Ntinda, P.O Box 7066, Kampala, Uganda</span>
+    <div class="socials">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header>
+    <div class="logo-area">
+      <div class="logo-img">
+        <img src="images/umac-logo.png" alt="UMAC Logo" onerror="this.style.display='none';this.parentElement.textContent='UMAC'" />
+      </div>
+      <div class="logo-text">
+        <h1>Uganda Marking<br />Association Centre</h1>
+        <p>Assessing. Certifying. Empowering.</p>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a data-page="home" class="active">Home</a></li>
+        <li><a data-page="about">About Us</a></li>
+        <li><a data-page="board">The Board</a></li>
+        <li><a data-page="ed">Executive Director</a></li>
+        <li><a data-page="media">Media Centre</a></li>
+        <li><a data-page="services">Services</a></li>
+        <li><a data-page="opportunities">Opportunities</a></li>
+        <li><a data-page="contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+  PAGE SECTIONS (only one visible at a time)
+  ============================================================ -->
+
+  <!-- ===== HOME ===== -->
+  <div id="home" class="page-section active">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-image-slot">
+        <img src="LOC.png" alt="UMAC Hero Image" onerror="this.style.display='none'" />
+        <div class="img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+          Place Hero Image Here<br /><small>Recommended: 900×600px</small>
+        </div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">Uganda Marking Association Centre</p>
+        <h2>Empowering Uganda Through <span>Credible Assessment</span></h2>
+        <p>We are the national assessment body for Uganda's school examinations—upholding professionalism, accountability, teamwork and innovativeness to build a globally competitive education system.</p>
+        <div class="hero-cta">
+          <a href="file:///C:/Users/aisuj/OneDrive/Desktop/WEB/e.html" class="btn btn-gold">Verify Results</a>
+          <a data-page="contact" class="btn btn-outline" style="cursor:pointer;">Contact Us</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK LINKS -->
+    <div class="quick-links">
+      <a href="file:///C:/Users/aisuj/OneDrive/Desktop/WEB/e.html"><span class="ql-icon">📄</span>Letter of Verification of Results</a>
+      <a href="file:///C:/Users/aisuj/OneDrive/Desktop/WEB/d.html"><span class="ql-icon">🌍</span>Equating of Foreign Results</a>
+      <a href="file:///C:/Users/aisuj/OneDrive/Desktop/WEB/d.html"><span class="ql-icon">✅</span>Centre Validation</a>
+      
+    </div>
+
+    <!-- WHO WE ARE -->
+    <section class="who">
+      <div class="who-image">
+        <img src="IMG_0010.JPG" alt="UMAC Team" onerror="this.style.display='none'" />
+        <div class="img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.2" width="56" height="56">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          Place Team/Office Photo Here<br /><small>Recommended: 800×600px</small>
+        </div>
+      </div>
+      <div>
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title">A Recognised Centre of Globally Competitive Assessment</h2>
+        <div class="section-line"></div>
+        <p style="color:var(--muted);line-height:1.8;margin-bottom:24px;">
+          The Uganda Marking Association Centre (UMAC) is the assessment body responsible for conducting regional MOCK examinations in Uganda. Our strategic direction is built around four core pillars designed to serve every learner with integrity.
+        </p>
+        <div class="value-cards">
+          <div class="value-card"><h4>🎯 Our Vision</h4><p>A Recognised Centre of Globally Competitive Educational Assessment and Certification.</p></div>
+          <div class="value-card"><h4>🚀 Our Mission</h4><p>To conduct valid, reliable and fair national examinations for the purposes of certification and selection.</p></div>
+          <div class="value-card"><h4>🤝 Teamwork</h4><p>Collaborating across directorates to deliver seamless, credible assessment services.</p></div>
+          <div class="value-card"><h4>💡 Innovativeness</h4><p>Embracing technology and research to continuously improve the quality of assessment in Uganda.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXECUTIVE DIRECTOR WELCOME -->
+    <section class="ed-section">
+      <div class="ed-photo">
+        <img src="JO.png" alt="Aisu Joshua – Executive Director" onerror="this.style.display='none'" />
+        <div class="img-placeholder" style="color:rgba(255,255,255,.35);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" width="56" height="56">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg>
+          ED Portrait Photo<br /><small>Recommended: 400×540px</small>
+        </div>
+      </div>
+      <div class="ed-content">
+        <p class="section-label">A Message from the Executive Director</p>
+        <h2 class="section-title">Leading with Purpose and Integrity</h2>
+        <div class="section-line"></div>
+        <p>Thank you for visiting the official website of the Uganda Marking Association Centre (UMAC). We are the regional assessment body for regional school examinations in Uganda. The key pillars of our strategic direction are built around professionalism, accountability, teamwork and innovativeness.</p>
+        <p>In a bid to serve the nation better, UMAC continues to invest in systems, people and processes that uphold the integrity of Uganda's examination results—ensuring that every certificate issued reflects genuine merit and effort.</p>
+        <div class="ed-sig">
+          AISU JOSHUA.
+          <span>Executive Director, Uganda Marking Association Centre</span>
+        </div>
+        <br />
+        <a data-page="ed" class="btn btn-gold" style="margin-top:8px;cursor:pointer;">Read More</a>
+      </div>
+    </section>
+
+    <!-- ISO BADGE -->
+    <div class="iso-bar">
+      <div class="iso-badge">ISO<br />CERTIFIED</div>
+      <div>
+        <p>We Are ISO Certified</p>
+        <span>UMAC meets international standards for quality management in educational assessment.</span>
+      </div>
+    </div>
+
+    <!-- VACANCIES -->
+    <section class="vacancies">
+      <p class="section-label">Career Opportunities</p>
+      <h2 class="section-title">Open Positions – April 2026</h2>
+      <div class="section-line"></div>
+      <div class="jobs-grid">
+        <div class="job-card">
+          <h4>Director Human Resources &amp; Administration</h4>
+          <p>Lead UMAC's human capital strategy, ensuring the right talent is in place to deliver on the Board's mandate.</p>
+          <a data-page="opportunities" style="cursor:pointer;">View Details &amp; Apply →</a>
+        </div>
+        <div class="job-card">
+          <h4>Director Research &amp; Development</h4>
+          <p>Drive innovation in assessment methodology, item banking, and evidence-based policy development for regional examinations.</p>
+          <a data-page="opportunities" style="cursor:pointer;">View Details &amp; Apply →</a>
+        </div>
+        <div class="job-card">
+          <h4>Manager Reprographics</h4>
+          <p>Oversee the secure production and distribution of examination materials across the country with highest confidentiality standards.</p>
+          <a data-page="opportunities" style="cursor:pointer;">View Details &amp; Apply →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services">
+      <p class="section-label">Our Services</p>
+      <h2 class="section-title">What We Offer</h2>
+      <div class="section-line"></div>
+      <div class="services-grid">
+        <div class="service-card"><div class="service-icon"><span class="si-fallback">📄</span></div><h4>Results Verification</h4><p>Obtain an official Letter of Verification for UMAC examination results for employment or further study.</p></div>
+        <div class="service-card"><div class="service-icon"><span class="si-fallback">🌍</span></div><h4>Foreign Results Equating</h4><p>Have international examination results officially equated to Uganda's national qualification standards.</p></div>
+        <div class="service-card"><div class="service-icon"><span class="si-fallback">🏫</span></div><h4>Centre Validation</h4><p>Schools and institutions can apply for official UMAC examination centre status through our online portal.</p></div>
+        <div class="service-card"><div class="service-icon"><span class="si-fallback">📝</span></div><h4>Examiner Registration</h4><p>Qualified teachers and professionals may apply to serve as UMAC examiners or field scouts.</p></div>
+      </div>
+    </section>
+
+
+  </div>
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="footer-logo"><img src="images/umac-logo.png" alt="UMAC" onerror="this.style.display='none';this.parentElement.textContent='UMAC'" /> UMAC</div>
+        <p>Uganda Marking Association Centre — "A Recognised Centre of Globally Competitive Educational Assessment and Certification."</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a data-page="home" style="cursor:pointer;">Home</a></li>
+          <li><a data-page="about" style="cursor:pointer;">About Us</a></li>
+          <li><a data-page="board" style="cursor:pointer;">The Board</a></li>
+          <li><a data-page="media" style="cursor:pointer;">Media Centre</a></li>
+          <li><a data-page="opportunities" style="cursor:pointer;">Opportunities</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a data-page="services" style="cursor:pointer;">Verify Results</a></li>
+          <li><a data-page="services" style="cursor:pointer;">Equate Foreign Results</a></li>
+          <li><a data-page="services" style="cursor:pointer;">Centre Validation</a></li>
+          <li><a data-page="services" style="cursor:pointer;">Apply as Examiner</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h5>Contact Us</h5>
+        <p>📍 35 Martyrs Way Ntinda,<br />P.O Box 7066, Kampala, Uganda</p>
+        <p>📞 Toll Free: <strong style="color:var(--gold)">0800 111 427</strong></p>
+        <p>📧 <a href="mailto:aisujoshua10@gmail.com" style="color:var(--gold);text-decoration:none">umac@umac.ac.ug</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>2026 ©️ Uganda Marking Association Centre. All rights reserved. @ICT Dept.</span>
+      <span><a data-page="contact" style="cursor:pointer;">Contact Us</a></span>
+    </div>
+  </footer>
+</body>
+</html>
