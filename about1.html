@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - UMAC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
+    :root {
+      --gold:        #d4a843;
+      --gold-light:  #f0d68a;
+      --gold-dark:   #b8922f;
+      --green:       #1a5c2a;
+      --green-dark:  #0f3d1b;
+      --black:       #1a1a1a;
+      --dark:        #222;
+      --muted:       #5a5a5a;
+      --light:       #f7f5f0;
+      --white:       #ffffff;
+      --shadow:      0 8px 32px rgba(0,0,0,0.08);
+      --shadow-h:    0 16px 48px rgba(0,0,0,0.14);
+      --radius:      12px;
+      --t:           0.3s ease;
+      --font-body:   'Inter', -apple-system, sans-serif;
+      --font-head:   'Playfair Display', serif;
+    }
+
+    /* ============================================================
+       RESET
+    ============================================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html  { scroll-behavior: smooth; }
+    body  { font-family: var(--font-body); color: var(--black); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a     { color: inherit; text-decoration: none; transition: var(--t); }
+    img   { max-width: 100%; height: auto; display: block; }
+    ul    { list-style: none; }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ============================================================
+       TOP BAR
+    ============================================================ */
+    .topbar {
+      background: var(--green-dark);
+      color: rgba(255,255,255,.85);
+      font-size: .8rem;
+      padding: 8px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px 16px;
+      border-bottom: 2px solid var(--gold);
+    }
+    .topbar-left  { display: flex; gap: 20px; flex-wrap: wrap; }
+    .topbar a     { color: var(--gold-light); }
+    .topbar a:hover { color: var(--gold); }
+
+    .socials { display: flex; gap: 10px; }
+    .socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      font-size: .78rem;
+      font-weight: 700;
+      color: #fff;
+      transition: var(--t);
+    }
+    .socials a:hover { background: var(--gold); color: var(--green-dark); transform: translateY(-2px); }
+
+    /* ============================================================
+       HEADER / NAV
+    ============================================================ */
+    header {
+      background: var(--white);
+      padding: 14px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 24px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+
+    .logo-area { display: flex; align-items: center; gap: 14px; }
+    .logo-img {
+      width: 56px; height: 56px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 900; font-size: 1.3rem;
+      border: 3px solid var(--gold);
+      flex-shrink: 0;
+    }
+    .logo-text h1 {
+      font-family: var(--font-head);
+      font-size: 1.3rem; font-weight: 900;
+      line-height: 1.2; color: var(--green-dark);
+      letter-spacing: -.02em;
+    }
+    .logo-text h1 span { color: var(--gold-dark); }
+    .logo-text p {
+      font-size: .68rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    nav ul { display: flex; flex-wrap: wrap; gap: 4px 6px; }
+    nav ul li a {
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: .82rem; font-weight: 500;
+      color: var(--dark);
+      transition: var(--t);
+      display: block;
+    }
+    nav ul li a:hover  { background: var(--gold);  color: #fff; }
+    nav ul li a.active { background: var(--green); color: #fff; }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    .hero-section {
+      padding: 80px 0 72px;
+      background: linear-gradient(135deg, #f7f5f0 0%, #fff 60%);
+      border-bottom: 1px solid #eee;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: #fff;
+      font-size: .72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .12em;
+      padding: 4px 14px; border-radius: 30px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: 2.2rem; font-weight: 900;
+      color: var(--green-dark);
+      line-height: 1.25; margin-bottom: 20px;
+    }
+
+    .intro-text p { color: var(--muted); font-size: 1.02rem; line-height: 1.8; margin-bottom: 14px; }
+
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--green); color: #fff;
+      font-size: .88rem; font-weight: 600;
+      padding: 12px 26px; border-radius: 30px;
+      border: 2px solid var(--green);
+      transition: var(--t);
+    }
+    .btn-primary:hover {
+      background: var(--green-dark); border-color: var(--green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(15,61,27,.25);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent; color: var(--green-dark);
+      font-size: .88rem; font-weight: 600;
+      padding: 12px 26px; border-radius: 30px;
+      border: 2px solid var(--green-dark);
+      transition: var(--t);
+    }
+    .btn-outline:hover { background: var(--green-dark); color: #fff; transform: translateY(-2px); }
+
+    .intro-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: linear-gradient(145deg, #e8e3d8, #d5cebc);
+      min-height: 320px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+      box-shadow: var(--shadow);
+      color: #888; text-align: center; padding: 24px;
+    }
+    .intro-image img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ============================================================
+       PAGE SECTIONS
+    ============================================================ */
+    .page-section { padding: 80px 0; }
+    .alt-bg        { background: var(--light); }
+
+    .section-label {
+      font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .16em;
+      color: var(--gold-dark); margin-bottom: 10px;
+    }
+
+    .section-heading {
+      font-family: var(--font-head);
+      font-size: 2rem; font-weight: 900;
+      color: var(--green-dark);
+      margin-bottom: 40px; line-height: 1.25;
+    }
+
+    .sub-heading {
+      font-family: var(--font-head);
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--green-dark); margin-bottom: 24px;
+    }
+
+    /* ============================================================
+       EXECUTIVE MESSAGE
+    ============================================================ */
+    .board-chair {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      align-items: flex-start;
+      background: #fff;
+      padding: 32px 36px;
+      border-radius: var(--radius);
+      border-left: 6px solid var(--gold);
+      box-shadow: var(--shadow);
+    }
+
+    .board-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: var(--green); color: #fff;
+      font-size: 1.5rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      border: 4px solid var(--gold-light);
+    }
+
+    .board-chair h3 {
+      font-family: var(--font-head);
+      font-size: 1.35rem; color: var(--green-dark);
+      margin-bottom: 2px;
+    }
+
+    .board-role {
+      color: var(--gold-dark); font-size: .85rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .08em;
+      margin-bottom: 14px; display: block;
+    }
+
+    .exec-quote {
+      color: var(--muted); font-size: 1.02rem;
+      line-height: 1.8; font-style: italic;
+      max-width: 680px;
+    }
+
+    /* ============================================================
+       VISION & MISSION
+    ============================================================ */
+    .vm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+
+    .vm-card {
+      background: var(--light);
+      padding: 32px 28px 28px;
+      border-radius: var(--radius);
+      border-left: 6px solid var(--gold);
+      box-shadow: var(--shadow);
+      transition: var(--t);
+    }
+    .vm-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-h); background: #fff; }
+
+    .vm-card .quote-mark {
+      font-size: 2.8rem; color: var(--gold);
+      font-family: var(--font-head);
+      line-height: 1; margin-bottom: -4px; display: block;
+    }
+    .vm-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.4rem; color: var(--green-dark); margin-bottom: 10px;
+    }
+    .vm-card p { color: var(--muted); font-size: .98rem; line-height: 1.75; }
+
+    /* ============================================================
+       CORE VALUES
+    ============================================================ */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .value-item {
+      background: var(--white);
+      padding: 32px 20px 28px;
+      border-radius: var(--radius);
+      text-align: center;
+      box-shadow: var(--shadow);
+      border-bottom: 4px solid var(--gold);
+      transition: var(--t);
+    }
+    .value-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-h); }
+
+    .value-icon { font-size: 2.6rem; display: block; margin-bottom: 10px; }
+    .value-item h4 { font-size: 1rem; font-weight: 700; color: var(--green-dark); }
+    .value-item p  { font-size: .85rem; color: var(--muted); margin-top: 6px; }
+
+    /* ============================================================
+       SERVICES
+    ============================================================ */
+    .services-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .service-item {
+      background: #fff;
+      padding: 24px 22px;
+      border-radius: var(--radius);
+      display: flex; align-items: flex-start; gap: 16px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--gold);
+      transition: var(--t);
+    }
+    .service-item:hover {
+      transform: translateX(6px);
+      box-shadow: var(--shadow-h);
+      border-left-color: var(--green);
+    }
+    .si-icon { font-size: 2rem; flex-shrink: 0; margin-top: 2px; }
+    .si-label { font-weight: 600; display: block; color: var(--dark); }
+    .si-desc  { font-size: .83rem; color: var(--muted); }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    .contact-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px 40px;
+      background: var(--light);
+      border-radius: var(--radius);
+      padding: 44px 52px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-item { display: flex; align-items: center; gap: 18px; }
+
+    .ci-icon {
+      width: 52px; height: 52px;
+      background: var(--green-dark); color: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+
+    .ci-text strong { display: block; color: var(--green-dark); font-weight: 700; margin-bottom: 2px; }
+    .ci-text span, .ci-text a { color: var(--muted); font-size: .95rem; }
+    .ci-text a { color: var(--green-dark); font-weight: 500; }
+    .ci-text a:hover { color: var(--gold-dark); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .site-footer {
+      background: var(--green-dark);
+      border-top: 3px solid var(--gold);
+      padding: 40px 0 32px;
+    }
+    .footer-inner {
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: flex-end; gap: 24px;
+    }
+    .footer-inner .logo-text h1 { color: var(--gold-light); font-size: 1.2rem; }
+    .footer-inner .logo-text h1 span { color: var(--gold); }
+    .footer-inner .logo-text p { color: rgba(255,255,255,.5); }
+    .footer-copy { color: rgba(255,255,255,.4); font-size: .8rem; margin-top: 8px; }
+    .footer-tagline { color: rgba(255,255,255,.55); font-size: .85rem; max-width: 280px; margin-top: 6px; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .intro-grid   { grid-template-columns: 1fr; gap: 32px; }
+      .vm-grid      { grid-template-columns: 1fr; }
+      .contact-block { grid-template-columns: 1fr; padding: 28px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-section  { padding: 48px 0 40px; }
+      .page-section  { padding: 52px 0; }
+      .section-title { font-size: 1.7rem; }
+      .section-heading { font-size: 1.6rem; }
+      .contact-block { padding: 24px 20px; }
+      .topbar        { font-size: .72rem; padding: 6px 16px; }
+      header         { padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span>📞 Toll Free: <a href="tel:0800111427">0800 111427</a></span>
+      <span>📍 35 Martyrs Way, Ntinda, Kampala</span>
+    </div>
+    <div class="socials">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Twitter">𝕏</a>
+      <a href="#" aria-label="YouTube">▶</a>
+      <a href="#" aria-label="LinkedIn">in</a>
+    </div>
+  </div>
+
+  <!-- HEADER / NAV -->
+  <header>
+    <div class="logo-area">
+      <div class="logo-img">U</div>
+      <div class="logo-text">
+        <h1>Uganda <span>Marking</span></h1>
+        <p>Association Centre &mdash; UMAC</p>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#introduction"     class="active">Home</a></li>
+        <li><a href="#executive-message">Message</a></li>
+        <li><a href="#who-we-are">Who We Are</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact-info">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO / INTRODUCTION -->
+    <section id="introduction" class="hero-section">
+      <div class="container">
+        <div class="intro-grid">
+
+          <div class="intro-text">
+            <div class="section-badge">Welcome to UMAC</div>
+            <h2 class="section-title">Uganda Marking Association Centre</h2>
+            <p>Thank you for visiting the official website of the Uganda Marking Association Centre (UMAC). We are the national assessment body for national schools exams in Uganda, trusted by learners, educators, and institutions across the country.</p>
+            <p>Our work ensures that every Ugandan student receives fair, reliable, and globally recognised certification — opening doors to opportunity at home and abroad.</p>
+            <div class="btn-row">
+              <a href="#services"     class="btn-primary">Our Services</a>
+              <a href="#contact-info" class="btn-outline">Contact Us</a>
+            </div>
+          </div>
+
+          <div class="intro-image">
+            <span style="font-size:3rem">🎓</span>
+            <strong style="color:#555">National Assessment Body</strong>
+            <span style="font-size:.8rem">Uganda Marking Association Centre</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EXECUTIVE MESSAGE -->
+    <section id="executive-message" class="page-section alt-bg">
+      <div class="container">
+        <p class="section-label">Leadership</p>
+        <h2 class="section-heading">Executive Director's Message</h2>
+
+        <div class="board-chair">
+          <div class="board-avatar">AJ</div>
+          <div>
+            <h3>Aisu Joshua</h3>
+            <span class="board-role">Executive Director, UMAC</span>
+            <blockquote class="exec-quote">
+              "The key pillars of our strategic direction are built around
+              <strong>Professionalism</strong>, <strong>Accountability</strong>,
+              <strong>Teamwork</strong> and <strong>Innovativeness</strong>.
+              Together these values guide every decision we make as we serve
+              the students, teachers and institutions of Uganda."
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO WE ARE -->
+    <section id="who-we-are" class="page-section">
+      <div class="container">
+        <p class="section-label">About Us</p>
+        <h2 class="section-heading">Who We Are</h2>
+
+        <!-- Vision & Mission -->
+        <div class="vm-grid">
+          <div class="vm-card">
+            <span class="quote-mark">"</span>
+            <h3>Our Vision</h3>
+            <p>A Recognised Centre of Globally Competitive Educational Assessment and Certification.</p>
+          </div>
+          <div class="vm-card">
+            <span class="quote-mark">"</span>
+            <h3>Our Mission</h3>
+            <p>To provide reliable, valid and fair national assessment and certification services that promote quality education in Uganda.</p>
+          </div>
+        </div>
+
+        <!-- Core Values -->
+        <div style="margin-top:48px">
+          <h3 class="sub-heading">Our Core Values</h3>
+          <div class="values-grid">
+
+            <div class="value-item">
+              <span class="value-icon">🏆</span>
+              <h4>Professionalism</h4>
+              <p>Maintaining the highest standards in everything we do.</p>
+            </div>
+
+            <div class="value-item">
+              <span class="value-icon">⚖️</span>
+              <h4>Accountability</h4>
+              <p>Taking responsibility for our actions and outcomes.</p>
+            </div>
+
+            <div class="value-item">
+              <span class="value-icon">🤝</span>
+              <h4>Teamwork</h4>
+              <p>Collaborating to achieve shared goals for Uganda.</p>
+            </div>
+
+            <div class="value-item">
+              <span class="value-icon">💡</span>
+              <h4>Innovativeness</h4>
+              <p>Embracing new ideas to continuously improve.</p>
+            </div>
+
+          </div>
+
+
+
+
+
+<!-- OUR SERVICES -->
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services-list">
+
+    <div class="service-item">
+      <span class="si-icon">📄</span>
+      <div>
+        <span class="si-label">Letter of Verification of Results</span>
+        <span class="si-desc">Official verification for your examination results.</span>
+      </div>
+    </div>
+
+    <div class="service-item">
+      <span class="si-icon">🌍</span>
+      <div>
+        <span class="si-label">Equating of Foreign Results</span>
+        <span class="si-desc">Recognition and equivalence of international qualifications.</span>
+      </div>
+    </div>
+
+    <div class="service-item">
+      <span class="si-icon">✅</span>
+      <div>
+        <span class="si-label">Centre Validation</span>
+        <span class="si-desc">Validation and accreditation of examination centres.</span>
+      </div>
+    </div>
+
+    <div class="service-item">
+      <span class="si-icon">📝</span>
+      <div>
+        <span class="si-label">Examiner &amp; Scout Application</span>
+        <span class="si-desc">Apply to become an examiner or scout for national exams.</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CONTACT INFORMATION -->
+<section id="contact-info">
+  <h2>Contact Information</h2>
+  <div class="contact-block">
+
+    <div class="contact-item">
+      <div class="ci-icon">📞</div>
+      <div class="ci-text">
+        <strong>Toll Free Hotline</strong>
+        <span><a href="tel:0800111427">0800 111427</a></span>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="ci-icon">📍</div>
+      <div class="ci-text">
+        <strong>Physical Address</strong>
+        <span>35 Martyrs Way, Ntinda, Kampala</span>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="ci-icon">📬</div>
+      <div class="ci-text">
+        <strong>Postal Address</strong>
+        <span>P.O Box 7066, Kampala, Uganda</span>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="ci-icon">🕐</div>
+      <div class="ci-text">
+        <strong>Working Hours</strong>
+        <span>Mon – Fri: 8:00 AM – 5:00 PM</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+            <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="logo-text">
+            <h1>Uganda <span>Marking</span></h1>
+            <p>Association Centre — UMAC</p>
+          </div>
+          <p class="footer-tagline">The national assessment body for schools exams in Uganda.</p>
+        </div>
+        <p class="footer-copy">&copy; 2026 Uganda Marking Association Centre. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

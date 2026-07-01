@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Board - UMAC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --gold:       #d4a843;
+      --gold-light: #f0d68a;
+      --gold-dark:  #b8922f;
+      --green:      #1a5c2a;
+      --green-dark: #0f3d1b;
+      --black:      #1a1a1a;
+      --dark:       #222;
+      --muted:      #5a5a5a;
+      --light:      #f7f5f0;
+      --white:      #ffffff;
+      --shadow:     0 8px 32px rgba(0,0,0,0.08);
+      --shadow-h:   0 16px 48px rgba(0,0,0,0.14);
+      --radius:     12px;
+      --t:          0.3s ease;
+      --font-body:  'Inter', -apple-system, sans-serif;
+      --font-head:  'Playfair Display', serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html  { scroll-behavior: smooth; }
+    body  { font-family: var(--font-body); color: var(--black); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a     { color: inherit; text-decoration: none; transition: var(--t); }
+    img   { max-width: 100%; height: auto; display: block; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── TOP BAR ────────────────────────────── */
+    .topbar {
+      background: var(--green-dark);
+      color: rgba(255,255,255,.85);
+      font-size: .8rem;
+      padding: 8px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px 16px;
+      border-bottom: 2px solid var(--gold);
+    }
+    .topbar a { color: var(--gold-light); }
+    .topbar a:hover { color: var(--gold); }
+    .socials { display: flex; gap: 10px; }
+    .socials a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      font-size: .78rem; font-weight: 700; color: #fff;
+      transition: var(--t);
+    }
+    .socials a:hover { background: var(--gold); color: var(--green-dark); transform: translateY(-2px); }
+
+    /* ── SITE HEADER ────────────────────────── */
+    .site-header {
+      background: var(--white);
+      padding: 14px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 24px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+    }
+    .logo-area { display: flex; align-items: center; gap: 14px; }
+    .logo-img {
+      width: 56px; height: 56px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 900; font-size: 1.3rem;
+      border: 3px solid var(--gold); flex-shrink: 0;
+    }
+    .logo-text h1 {
+      font-family: var(--font-head);
+      font-size: 1.3rem; font-weight: 900;
+      line-height: 1.2; color: var(--green-dark);
+      letter-spacing: -.02em;
+    }
+    .logo-text h1 span { color: var(--gold-dark); }
+    .logo-text p {
+      font-size: .68rem; text-transform: uppercase;
+      letter-spacing: .12em; color: var(--muted); font-weight: 600;
+    }
+    .site-nav ul { display: flex; flex-wrap: wrap; gap: 4px 6px; list-style: none; padding: 0; }
+    .site-nav ul li a {
+      padding: 8px 16px; border-radius: 30px;
+      font-size: .82rem; font-weight: 500; color: var(--dark);
+      transition: var(--t); display: block;
+    }
+    .site-nav ul li a:hover  { background: var(--gold);  color: #fff; }
+    .site-nav ul li a.active { background: var(--green); color: #fff; }
+
+    /* ── PAGE BANNER ────────────────────────── */
+    .page-banner {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      padding: 56px 24px 48px;
+      color: #fff;
+      border-bottom: 4px solid var(--gold);
+    }
+    .page-banner h2 {
+      font-family: var(--font-head);
+      font-size: 2.2rem; font-weight: 900;
+      line-height: 1.25; margin-top: 20px;
+    }
+    .page-banner p { font-size: .85rem; color: rgba(255,255,255,.6); margin-bottom: 8px; }
+    .breadcrumb { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; list-style: none; padding: 0; }
+    .breadcrumb li { font-size: .82rem; color: rgba(255,255,255,.7); }
+    .breadcrumb li + li::before { content: "›"; margin-right: 6px; color: var(--gold); }
+    .breadcrumb a { color: var(--gold-light); }
+    .breadcrumb a:hover { color: var(--gold); }
+
+    /* ── MAIN ───────────────────────────────── */
+    main { padding: 64px 0; }
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* Chairperson card */
+    .chair-card {
+      background: var(--light);
+      border-radius: var(--radius);
+      border-top: 4px solid var(--gold);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: sticky;
+      top: 100px;
+      text-align: center;
+    }
+    .chair-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+    .chair-card-body { padding: 24px; }
+    .chair-card-body h3 {
+      font-family: var(--font-head);
+      font-size: 1.1rem; color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+    .chair-card-body p {
+      font-size: .78rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--gold-dark);
+    }
+
+    /* Section labels and headings */
+    .section-label {
+      font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .16em;
+      color: var(--gold-dark); margin-bottom: 10px;
+    }
+    .section-heading {
+      font-family: var(--font-head);
+      font-size: 1.8rem; font-weight: 900;
+      color: var(--green-dark);
+      margin-bottom: 24px; line-height: 1.25;
+    }
+    .sub-heading {
+      font-family: var(--font-head);
+      font-size: 1.3rem; font-weight: 700;
+      color: var(--green-dark);
+      margin: 36px 0 14px;
+    }
+    .body-text p {
+      color: var(--muted); font-size: 1rem;
+      line-height: 1.85; margin-bottom: 16px;
+    }
+
+    /* Ordered / unordered lists */
+    .styled-ol, .styled-ul {
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .styled-ol { counter-reset: umac-counter; }
+    .styled-ol li { counter-increment: umac-counter; display: flex; align-items: flex-start; gap: 12px; }
+    .styled-ol li::before {
+      content: counter(umac-counter);
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 28px; height: 28px;
+      background: var(--green-dark); color: var(--gold);
+      border-radius: 50%; font-size: .75rem; font-weight: 700;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .styled-ul li { display: flex; align-items: flex-start; gap: 10px; }
+    .styled-ul li::before {
+      content: "✦";
+      color: var(--gold); font-size: .7rem;
+      flex-shrink: 0; margin-top: 5px;
+    }
+    .styled-ol li span,
+    .styled-ul li span { color: var(--muted); font-size: .95rem; line-height: 1.7; }
+
+    /* Committees pills */
+    .pill-grid {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin: 16px 0 32px;
+    }
+    .pill {
+      background: var(--light);
+      border: 1px solid #e0dbd0;
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: .85rem; font-weight: 500;
+      color: var(--green-dark);
+      transition: var(--t);
+    }
+    .pill:hover { background: var(--gold); color: #fff; border-color: var(--gold); transform: translateY(-2px); }
+
+    /* Services quick links */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .service-link {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--light);
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--gold);
+      font-size: .9rem; font-weight: 500; color: var(--dark);
+      box-shadow: var(--shadow);
+      transition: var(--t);
+    }
+    .service-link:hover {
+      transform: translateX(5px);
+      background: #fff;
+      box-shadow: var(--shadow-h);
+      border-left-color: var(--green);
+      color: var(--green-dark);
+    }
+    .service-link::before { content: "→"; color: var(--gold); font-weight: 700; }
+
+    /* Contact form */
+    .form-section {
+      background: var(--light);
+      border-radius: var(--radius);
+      padding: 40px 44px;
+      box-shadow: var(--shadow);
+      margin-top: 48px;
+    }
+    .form-section h2 {
+      font-family: var(--font-head);
+      font-size: 1.5rem; color: var(--green-dark);
+      margin-bottom: 8px;
+    }
+    .form-section p.form-sub {
+      color: var(--muted); font-size: .9rem; margin-bottom: 28px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      font-size: .8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: var(--green-dark);
+    }
+    .form-group input,
+    .form-group textarea {
+      padding: 12px 16px;
+      border: 2px solid #e0dbd0;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: .95rem;
+      color: var(--dark);
+      background: #fff;
+      transition: var(--t);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(26,92,42,.1); }
+    .form-group textarea { min-height: 130px; resize: vertical; }
+    .form-notice {
+      font-size: .8rem; color: var(--muted);
+      margin-top: 16px; margin-bottom: 20px;
+    }
+    .btn-submit {
+      display: inline-block;
+      background: var(--green); color: #fff;
+      font-size: .9rem; font-weight: 600;
+      padding: 14px 32px; border-radius: 30px;
+      border: 2px solid var(--green);
+      cursor: pointer;
+      transition: var(--t);
+    }
+    .btn-submit:hover {
+      background: var(--green-dark); border-color: var(--green-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(15,61,27,.25);
+    }
+
+    /* Share */
+    .share-section {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-top: 32px;
+      box-shadow: var(--shadow);
+      border-top: 3px solid var(--gold);
+    }
+    .share-section h2 {
+      font-family: var(--font-head);
+      font-size: 1.1rem; color: var(--green-dark);
+      margin-bottom: 14px;
+    }
+    .share-links { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; padding: 0; }
+    .share-links a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 30px;
+      font-size: .85rem; font-weight: 600;
+      transition: var(--t);
+    }
+    .share-whatsapp { background: #25D366; color: #fff; }
+    .share-whatsapp:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(37,211,102,.3); }
+    .share-facebook { background: #1877F2; color: #fff; }
+    .share-facebook:hover { background: #1362ce; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(24,119,242,.3); }
+    .share-twitter  { background: #000; color: #fff; }
+    .share-twitter:hover  { background: #333; transform: translateY(-2px); }
+
+    /* Divider */
+    .divider { border: none; border-top: 1px solid #eee; margin: 40px 0; }
+
+    /* ── FOOTER ─────────────────────────────── */
+    .site-footer {
+      background: var(--green-dark);
+      border-top: 3px solid var(--gold);
+      padding: 56px 0 32px;
+      color: rgba(255,255,255,.75);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-brand .logo-text h1 { color: var(--gold-light); font-size: 1.2rem; }
+    .footer-brand .logo-text h1 span { color: var(--gold); }
+    .footer-brand .logo-text p { color: rgba(255,255,255,.45); }
+    .footer-tagline {
+      font-style: italic; font-size: .88rem;
+      color: rgba(255,255,255,.55);
+      margin-top: 12px; line-height: 1.6;
+    }
+    .footer-col h4 {
+      font-size: .75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .14em;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul li a {
+      font-size: .85rem; color: rgba(255,255,255,.65);
+      transition: var(--t);
+    }
+    .footer-col ul li a:hover { color: var(--gold-light); padding-left: 4px; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 24px;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .footer-bottom p { font-size: .8rem; color: rgba(255,255,255,.35); }
+    .footer-bottom a { color: var(--gold-light); }
+    .footer-bottom a:hover { color: var(--gold); }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 900px) {
+      .content-grid  { grid-template-columns: 1fr; }
+      .chair-card    { position: static; }
+      .footer-grid   { grid-template-columns: 1fr 1fr; }
+      .form-grid     { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .page-banner h2  { font-size: 1.7rem; }
+      .section-heading { font-size: 1.5rem; }
+      .footer-grid     { grid-template-columns: 1fr; }
+      .form-section    { padding: 24px 20px; }
+      .topbar          { font-size: .72rem; padding: 6px 16px; }
+      .site-header     { padding: 12px 16px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div style="display:flex;gap:20px;flex-wrap:wrap">
+      <span>📞 Toll Free: <a href="tel:0800111427">0800 111427</a></span>
+      <span>📍 35 Martyrs Way, Ntinda, Kampala</span>
+    </div>
+    <div class="socials">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Twitter">𝕏</a>
+      <a href="#" aria-label="YouTube">▶</a>
+      <a href="#" aria-label="LinkedIn">in</a>
+    </div>
+  </div>
+
+  <!-- SITE HEADER -->
+  <div class="site-header">
+    <div class="logo-area">
+      <div class="logo-img">U</div>
+      <div class="logo-text">
+        <h1>Uganda <span>Marking</span></h1>
+        <p>Association Centre &mdash; UMAC</p>
+      </div>
+    </div>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/the-board" class="active">The Board</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- PAGE BANNER -->
+  <div class="page-banner">
+    <div class="container">
+      <p>You are here:</p>
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li>The Board</li>
+      </ol>
+      <h2>The Board</h2>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main>
+    <div class="container">
+      <div class="content-grid">
+
+        <!-- LEFT: Content -->
+        <div>
+
+          <!-- Chairperson message -->
+          <p class="section-label">Leadership</p>
+          <h2 class="section-heading">A Word from the Chairperson</h2>
+          <div class="body-text">
+            <p>Hello and welcome to UMAC.</p>
+            <p>The Uganda Marking Association Centre (UMAC) was initially established by an Act of Parliament in 1983, Cap 137 of the Laws of Uganda; legalizing all actions taken with effect from 1st July 1980 when it effectively started operating. This law was repealed and replaced by the UMAC Act No. 1, 2021.</p>
+            <p>The Board is a body corporate mandated to conduct and manage examinations in Uganda for the end of the educational cycle at Primary and Secondary school level; and to conduct examination-related research. We aspire to be 'a Recognized Centre of Globally Competitive Educational Assessment and Certification'. The Mission of the Board is to Conduct Valid, Reliable, Equitable and Quality Assessment of Learners' Achievements in a Professional and Innovative Manner.</p>
+            <p>Section 6 of the UMAC Act 2021 provides for a Board of Directors appointed by the Minister responsible for Education. The composition represents the various interest groups and stakeholders in the Sector and the Public. There are 13 members on the Board of Directors and the Executive Director is the Secretary to the Board, as well as the Accounting Officer.</p>
+            <p>In executing its duties, the Board is guided by its core values of Accountability, Confidentiality, Teamwork, Innovativeness and Professionalism. The Board also works to strengthen inclusive assessment to ensure not just equality, but also equity while undertaking assessment.</p>
+          </div>
+
+          <!-- Board Committees -->
+          <h3 class="sub-heading">Board Committees</h3>
+          <p style="color:var(--muted);font-size:.95rem;margin-bottom:16px">The Board operates through seven committees:</p>
+          <div class="pill-grid">
+            <div class="pill">Finance &amp; General Purposes</div>
+            <div class="pill">Examinations Committee</div>
+            <div class="pill">Human Resources Committee</div>
+            <div class="pill">Examinations Security Committee</div>
+            <div class="pill">Examinations Research Committee</div>
+            <div class="pill">ICT Committee</div>
+            <div class="pill">Audit Committee</div>
+          </div>
+
+          <hr class="divider">
+
+          <!-- What we do -->
+          <p class="section-label">Our Mandate</p>
+          <h2 class="section-heading">What We Do</h2>
+          <div class="body-text">
+            <p>UMAC is mandated to conduct and manage examinations in Uganda for the end of the educational cycle at Primary and Secondary school level, as well as to conduct examination-related research.</p>
+          </div>
+
+          <!-- Statutory functions -->
+          <h3 class="sub-heading">Statutory Functions of UMAC</h3>
+          <ol class="styled-ol">
+            <li><span>Conduct primary, secondary, and such other examinations within Uganda as it may consider desirable in the public interest.</span></li>
+            <li><span>Publish past examination papers.</span></li>
+            <li><span>Award certificates to successful candidates in such examinations.</span></li>
+            <li><span>Invite anybody or bodies outside Uganda, as it may think fit, and to jointly conduct academic and other examinations.</span></li>
+            <li><span>Award acceptable certificates to successful candidates jointly with the invited bodies.</span></li>
+            <li><span>Invite other bodies, as it may think fit, to conduct examinations and award acceptable certificates or diplomas.</span></li>
+            <li><span>Advise anybody or bodies so invited upon the adoption of examinations necessary for the requirements of Uganda and to assist any such body or bodies to conduct such examinations.</span></li>
+            <li><span>Make arrangements for the conduct of research and development of examination systems.</span></li>
+            <li><span>Make rules regulating the conduct of examinations and for all purposes incidental thereto.</span></li>
+          </ol>
+
+          <!-- Programs -->
+          <h3 class="sub-heading">Programs Undertaken by UMAC</h3>
+          <ul class="styled-ul">
+            <li><span>Assessment and Certification of Primary Leaving Examination</span></li>
+            <li><span>Assessment and Certification of Uganda Certificate of Education</span></li>
+            <li><span>Assessment and Certification of Uganda Advanced Certificate of Education</span></li>
+            <li><span>Equating of Results of Foreign Qualifications (PLE, UCE &amp; UACE)</span></li>
+            <li><span>Verification of results for PLE, UCE and UACE</span></li>
+            <li><span>National Assessment of Progress in Education (P.3, P.6, and S.2)</span></li>
+            <li><span>Research geared to improvement in the quality of assessment and certification</span></li>
+          </ul>
+
+          <!-- Examination Cycle -->
+          <h3 class="sub-heading">The UMAC Examination Cycle</h3>
+          <ul class="styled-ul">
+            <li><span>Registration of candidates</span></li>
+            <li><span>Accreditation of Examination Centers</span></li>
+            <li><span>Identifying and training of new Examiners</span></li>
+            <li><span>Preparation of question papers (setting, moderation, compilation, typesetting, proofing and banking)</span></li>
+            <li><span>Printing and packing done in-house under strict security measures</span></li>
+            <li><span>Stakeholder engagements (Inspectors, Area and Centre Supervisors, Security agencies)</span></li>
+            <li><span>Field Conduct of Examinations</span></li>
+            <li><span>Marking of examination scripts</span></li>
+            <li><span>Release of results and certification</span></li>
+          </ul>
+
+          <hr class="divider">
+
+          <!-- Services -->
+          <p class="section-label">What We Offer</p>
+          <h2 class="section-heading">Our Services</h2>
+          <div class="services-grid">
+            <a href="/services/registration"  class="service-link">Registration of Candidates</a>
+            <a href="/services/assessment"    class="service-link">Assessment of Candidates</a>
+            <a href="/services/certificates"  class="service-link">Award of Certificates</a>
+            <a href="/services/equating"      class="service-link">Equating of Foreign Results</a>
+            <a href="/publications"           class="service-link">Research and Publications</a>
+            <a href="/services/validation"    class="service-link">Validation of Exam Centres</a>
+            <a href="/services/verification"  class="service-link">Verification of Results</a>
+          </div>
+
+          <!-- Share -->
+          <div class="share-section">
+            <h2>Share this page</h2>
+            <ul class="share-links">
+              <li>
+                <a class="share-whatsapp"
+                   href="https://api.whatsapp.com/send?text=The%20Board%20-%20https%3A%2F%2Funeb.ac.ug%2Fthe_board%2F"
+                   target="_blank" rel="noopener">✉ WhatsApp</a>
+              </li>
+              <li>
+                <a class="share-facebook"
+                   href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Funeb.ac.ug%2Fthe_board%2F&t=The+Board"
+                   target="_blank" rel="noopener">f Facebook</a>
+              </li>
+              <li>
+                <a class="share-twitter"
+                   href="https://twitter.com/share?url=https%3A%2F%2Funeb.ac.ug%2Fthe_board%2F&text=The+Board"
+                   target="_blank" rel="noopener">𝕏 Twitter / X</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact form -->
+          <div class="form-section">
+            <h2>Any Questions?</h2>
+            <p class="form-sub">Fill in the form below and our team will get back to you.</p>
+            <form action="#" method="post">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">Name *</label>
+                  <input type="text" id="name" name="name" placeholder="Your full name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">E-mail *</label>
+                  <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                  <label for="telephone">Telephone *</label>
+                  <input type="tel" id="telephone" name="telephone" placeholder="+256 700 000 000" required>
+                </div>
+                <div class="form-group full">
+                  <label for="message">Message *</label>
+                  <textarea id="message" name="message" placeholder="Type your question or message here…" required></textarea>
+                </div>
+              </div>
+              <p class="form-notice">By using this form you agree UMAC may obtain and store the information entered here.</p>
+              <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: Chairperson card -->
+        <aside>
+          <div class="chair-card">
+            <img
+              src="https://uneb.ac.ug/wp-content/uploads/2024/09/ChairPerson-UNEB-Prof_Celestino-Obua.png"
+              alt="Prof. Ainembabazi Emma Paula — Chairperson"
+            >
+            <div class="chair-card-body">
+              <h3>Prof. Ainembabazi Emma Paula</h3>
+              <p>Chairperson, UMAC Board</p>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <div class="logo-text">
+            <h1>Uganda <span>Marking</span></h1>
+            <p>Association Centre — UMAC</p>
+          </div>
+          <p class="footer-tagline">
+            "A Recognized Centre of Globally Competitive Educational
+            Assessment and Certification."
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>About UMAC</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/the-board">The Board</a></li>
+            <li><a href="/executive-director">Office of the Executive Director</a></li>
+            <li><a href="/directorate-of-examinations">Directorate of Examinations</a></li>
+            <li><a href="/human-resources">Human Resources &amp; Administration</a></li>
+            <li><a href="/technology">Technology &amp; Reprographics</a></li>
+            <li><a href="/research">Research &amp; Development</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="/services/registration">Registration</a></li>
+            <li><a href="/services/assessment">Assessment</a></li>
+            <li><a href="/services/certificates">Award of Certificates</a></li>
+            <li><a href="/services/verification">Verification of Results</a></li>
+            <li><a href="/services/validation">Validation</a></li>
+            <li><a href="/services/equating">Equating</a></li>
+            <li><a href="/publications">Publications</a></li>
+            <li><a href="/news">News</a></li>
+            <li><a href="/opportunities">Opportunities</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Uganda Marking Association Centre. All rights reserved. @ICT Dept.</p>
+        <a href="/contact">Contact us</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
